@@ -1,0 +1,34 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+package-lock.json
+yarn.lock
+
+# TypeScript
+dist/
+out/
+build/
+*.tsbuildinfo
+
+# Environment Variables
+.env
+.env.production 
+.env.*  # Para ignorar cualquier archivo .env de desarrollo o producción
+
+# Logs
+logs/
+*.log
+
+# Coverage
+coverage/
+*.lcov
+
+# IDE y Editor de Configuración
+.vscode/
+.idea/
+
+# Sistema de Archivos
+.DS_Store
+Thumbs.db
