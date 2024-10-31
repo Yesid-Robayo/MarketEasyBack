@@ -1,15 +1,16 @@
 import express, { Express } from 'express';
-
+import morgan from 'morgan';
+import helmet from 'helmet';
 import cors from 'cors';
-import { Request, Response, NextFunction } from 'express';
 import router from './routes/routes';
+import { Request, Response, NextFunction } from 'express';
 import { routerDIR } from './utils/routerDIR';
 
 const app: Express = express();
 
 // CORS configuration
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: true,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
@@ -18,7 +19,8 @@ app.use(cors({
 // Other middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(morgan('dev'));
+app.use(helmet());
 
 // Routes
 app.use(routerDIR.main, router);

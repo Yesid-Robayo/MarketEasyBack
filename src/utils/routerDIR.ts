@@ -1,11 +1,31 @@
+
 export const routerDIR = {
     main: '/apiV1',
-    auth:{
+    auth: {
         main: '/auth',
-        children:{
+        children: {
             login: '/login',
-            register: '/register',
-            logout: '/logout',
+        }
+    },
+    user: {
+        main: '/user',
+        children: {
+            createUser: '/createUser',
+        }
+    },
+    products: {
+        main: '/products',
+        children: {
+            createProduct: '/createProduct',
+            getProducts: '/getProducts',
+        }
+    },
+    cart: {
+        main: '/cart',
+        children: {
+            addProductToCart: '/addProductToCart',
+            getCart: '/getCart',
+            deleteProductFromCart: '/deleteProductFromCart',
         }
     }
 }
