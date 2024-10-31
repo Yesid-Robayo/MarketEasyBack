@@ -56,5 +56,28 @@ export const cartModel = {
         } finally {
             connection.release();
         }
+    },
+    async updateProductQuantity(userId: number, productId: number, quantity: number) {
+        const connection = await createPool().getConnection();
+        try {
+            await connection.beginTransaction();
+            const sqlChangeStock = 'UPDATE products SET stock = stock + (SELECT quantity FROM cart WHERE user_id = ? AND product_id = ?) WHERE id = ?';
+            await connection.execute(sqlChangeStock, [userId, productId, productId]);
+            const [result] = await connection.execute(
+                'UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?',
+                [quantity, userId, productId]
+            );
+            const sqlChangeStock2 = 'UPDATE products SET stock = stock - ? WHERE id = ?';
+            await connection.execute(sqlChangeStock2, [quantity, productId]);
+
+            await connection.commit();
+            return result;
+        } catch (error) {
+            await connection.rollback();
+            console.error('Error in cartModel.updateProductQuantity:', error);
+            throw error;
+        } finally {
+            connection.release();
+        }
     }
 }

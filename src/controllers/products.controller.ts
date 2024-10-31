@@ -15,7 +15,7 @@ export const productsController = {
     },
     async getProducts(req: any, res: any) {
         const result = await productModel.getProducts();
-        res.status(200).json(result);
+        res.status(200).json({ code: 200, products: result });
     }
 
 }

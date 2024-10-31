@@ -43,5 +43,19 @@ export const cartController = {
             console.error('Error in cartController.deleteProductFromCart:', error);
             res.status(500).json({ code: 500, message: 'Error interno del servidor' });
         }
+    },
+    async updateProductQuantity(req: any, res: any) {
+        try {
+            const { userId, productId, quantity } = req.body;
+            if (!userId || !productId || !quantity) {
+                res.status(400).json({ code: 400, message: 'Todos los datos requeridos' });
+                return;
+            }
+            const result = await cartModel.updateProductQuantity(userId, productId, quantity);
+            res.status(200).json({ code: 200, message: 'Cantidad de producto actualizada exitosamente' });
+        } catch (error) {
+            console.error('Error in cartController.updateProductQuantity:', error);
+            res.status(500).json({ code: 500, message: 'Error interno del servidor' });
+        }
     }
 }

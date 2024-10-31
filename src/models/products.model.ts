@@ -22,7 +22,7 @@ export const productModel = {
     },
     async getProducts() {
         const sql = 'SELECT * FROM products';
-        const [rows] = await query(sql, []);
+        const rows = await query(sql, []);
         return rows;
     },
     async getProductById(id: number) {
