@@ -57,5 +57,19 @@ export const cartController = {
             console.error('Error in cartController.updateProductQuantity:', error);
             res.status(500).json({ code: 500, message: 'Error interno del servidor' });
         }
-    }
+    },
+    async getCountProduct(req: any, res: any) {
+        try {
+            const { userId, productId } = req.body;
+            const result = await cartModel.getContProduct(userId, productId);
+            if (!result) {
+                res.status(404).json({ code: 404, message: 'No se encontraron productos en el carrito' });
+                return;
+            }
+            res.status(200).json({ code: 200, data: result });
+        } catch (error) {
+            console.error('Error in cartController.getCart:', error);
+            res.status(500).json({ code: 500, message: 'Error interno del servidor' });
+        }
+    },
 }

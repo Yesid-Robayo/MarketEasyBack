@@ -27,6 +27,7 @@ export const routerDIR = {
             getCart: '/getCart',
             deleteProductFromCart: '/deleteProductFromCart',
             updateProductQuantity: '/updateProductQuantity',
+            getCountProduct: '/getCountProduct',
         }
     }
 }
